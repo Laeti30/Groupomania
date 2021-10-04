@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config({ path: './config/.env' })
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
@@ -11,12 +11,12 @@ const app = express();
 
 // Connexion à la bdd - sequelize
 const db = require('./models')
-// db.sequelize.sync();
+db.sequelize.sync()
 
-// Drop the table if it already exists
-db.sequelize.sync({ force: true }).then(() => {
-  console.log('Drop and re-sync db.')
-})
+// // Drop the table if it already exists
+// db.sequelize.sync({ force: true }).then(() => {
+//   console.log('Drop and re-sync db.')
+// })
 
 // Création du middleware contenant les headers de la réponse
 app.use((req, res, next) => {
